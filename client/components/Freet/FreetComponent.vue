@@ -34,6 +34,15 @@
         <button @click="deleteFreet">
           🗑️ Delete
         </button>
+
+        <button @click="upvoteFreet">
+          👍 Upvote
+        </button>
+
+        <button @click="removeUpvote">
+          👍🗑️ Remove Upvote
+        </button>
+
       </div>
     </header>
     <textarea
@@ -110,6 +119,26 @@ export default {
       };
       this.request(params);
     },
+    async upvoteFreet() {
+      const options = {
+        method: 'POST', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({freetId: this.freet._id})
+      }
+
+      const r = await fetch("/api/upvote", options);
+    },
+
+    async removeUpvote() {
+      const options = {
+        method: 'DELETE', 
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({freetId: this.freet._id})
+      }
+
+      const r = await fetch("/api/upvote", options);
+    },
+
     submitEdit() {
       /**
        * Updates freet to have the submitted draft content.
